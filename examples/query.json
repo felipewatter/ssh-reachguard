@@ -1,0 +1,8 @@
+{
+  "owner": "ops-backup",
+  "host": "bastion-01",
+  "account": "root",
+  "source_ip": "198.51.100.15",
+  "mode": "authenticate",
+  "expect": false
+}

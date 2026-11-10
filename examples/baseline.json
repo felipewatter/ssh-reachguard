@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "owners": [
+    {
+      "id": "ops-backup",
+      "keys": [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINjvz6y2nwckTD3PPDibEN6D3Byrf1gHK3n+r9vud0+B"
+      ]
+    },
+    {
+      "id": "ci-deployer",
+      "keys": [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8VM9zw2xLLwY3Qnr8PsKTCdo9S+1MapQlcXac2fW8e"
+      ]
+    },
+    {
+      "id": "retired-contractor",
+      "keys": [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB0nfhajaZEUE9UFygBphdYMf/zvcYokzJHMUfJEMuUh"
+      ],
+      "status": "disabled"
+    }
+  ],
+  "hosts": [
+    {
+      "name": "bastion-01",
+      "critical": true,
+      "accounts": [
+        {
+          "name": "root",
+          "authorized_keys": [
+            "restrict,from=\"10.20.0.0/16\",command=\"/usr/local/sbin/backup\",expiry-time=\"20271231235959Z\" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINjvz6y2nwckTD3PPDibEN6D3Byrf1gHK3n+r9vud0+B backup-robot"
+          ]
+        },
+        {
+          "name": "deployer",
+          "authorized_keys": [
+            "restrict,from=\"10.20.0.0/16\",expiry-time=\"20271231235959Z\" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8VM9zw2xLLwY3Qnr8PsKTCdo9S+1MapQlcXac2fW8e deploy-key"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "web-01",
+      "critical": false,
+      "accounts": [
+        {
+          "name": "deployer",
+          "authorized_keys": [
+            "restrict,from=\"10.20.0.0/16\",expiry-time=\"20271231235959Z\" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8VM9zw2xLLwY3Qnr8PsKTCdo9S+1MapQlcXac2fW8e deploy-key"
+          ]
+        }
+      ]
+    }
+  ]
+}
